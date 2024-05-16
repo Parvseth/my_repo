@@ -24,14 +24,14 @@ class SensorDataSubscriber(Node):
             self.listener_callback1 , 
             10
         )
-        '''
+        
         self.subscription2 = self.create_subscription(
             Imu,
             'imu/data',
             self.listener_callback2,
             10
         )
-        '''
+        
         
 
     def listener_callback(self, msg):
@@ -76,14 +76,35 @@ class SensorDataSubscriber(Node):
         print()
         print()
         print()
-    '''
+    
     def listener_callback2(self,msg):
-        imu = self.imu
-        self.get_logger().info(f'Imu ={imu}')
+        header = msg.header
+        orientation = msg.orientation
+        x1 = orientation.x
+        y1 = orientation.y
+        z1 = orientation.z
+        orientation_cov = msg.orientation_covariance
+        x2 = orientation_cov.x
+        y2 = orientation_cov.y
+        z2 = orientation_cov.z
+        ang_vel = msg.angular_velocity 
+        x3 = ang_vel.x
+        y3 = ang_vel.y  
+        z3 = ang_vel.z
+        ang_vel_cov = msg.angular_velocity_covariance
+        x4 = ang_vel_cov.x
+        y4 = ang_vel_cov.y
+        z4 = ang_vel_cov.z
+        # log the extracted data
+        self.get_logger().info(f'header={header}')
+        self.get_logger().info(f'Orientation={x1,y1,z1}')
+        self.get_logger().info(f'Orientation Covariance={x2,y2,z2}')
+        self.get_logger().info(f'Angular Velocity={x3,y3,z3}')
+        self.get_logger().info(f'Angular Velocity Covariance={x4,y4,z4}')
         print()
         print()
         print()
-        '''
+        
         
 
 
@@ -97,4 +118,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
