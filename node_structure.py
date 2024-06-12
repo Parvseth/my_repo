@@ -9,7 +9,7 @@ class MyNode(node) :
 def main(args=None) :
     rclpy.init(args=args)   # ROS 2 client library is being initialized with the provided arguments
     node= "MyNode"
-    rclpy.spin(node)
+    rclpy.spin(node)           # it processes callback , and thus keeps the node running
     rclpy.shutdown()
 
 if  __name__ == '__main__':              # This idiom is used to ensure that the main() function is only executed when the script is run directly, and not when it's imported as a module. 
